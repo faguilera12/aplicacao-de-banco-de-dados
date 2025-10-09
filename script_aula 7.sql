@@ -54,4 +54,7 @@ DELETE FROM comidas_favoritas WHERE NOTA < 8;
 
 SELECT NOME_PESSOA, COMIDA, NOTA FROM comidas_favoritas WHERE  LENGTH('NOME_PESSOA') > 10 AND NOTA BETWEEN 7 AND 10;
 
+GRANT SELECT, INSERT ON comidas_favoritas TO 'professor'@'%';
+REVOKE SELECT ON comidas_favoritas FROM 'professor'@'%';
+
  
