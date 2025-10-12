@@ -185,5 +185,31 @@ WHERE QTD_DISPONIVEL > 2
 -- FAÇA AS OPERAÇÕES
 -- POR FIM DÊ COMMIT;
 
+-- Inicia a transação
+START TRANSACTION;
 
-SELECT * FROM SERIES;
+-- 1 Verifica o estoque do livro desejado
+SELECT QTD_DISPONIVEL 
+FROM LIVROS_EM_ESTOQUE 
+WHERE ID_LIVRO = 4;
+
+-- 1 Execute o SELECT primeiro — ele mostra se o livro ainda tem exemplares.
+-- 2 Se o número for maior que 0, continue com os demais comandos.
+-- 3 Se for 0, digite:
+ROLLBACK;
+
+
+-- 2 Diminui 1 do estoque
+UPDATE LIVROS_EM_ESTOQUE
+SET QTD_DISPONIVEL = QTD_DISPONIVEL - 1
+WHERE ID_LIVRO = 4;
+
+-- 3️ Registra o empréstimo
+INSERT INTO EMPRESTIMOS (ID_ALUNO, ID_LIVRO, DATA_EMPRESTIMO, DATA_DEVOLUCAO_PREVISTA)
+VALUES (11, 4, '2025-10-10', '2025-10-25');
+
+-- 4️ Confirma a transação
+COMMIT;
+
+
+
